@@ -9,34 +9,34 @@ export default defineNuxtConfig({
   ],
   googleFonts: {
     families: {
-      Lexend: '100..900',
-    }
+      Lexend: "100..900",
+    },
   },
   app: {
     head: {
-      title: 'MOOD™',
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
+      title: "Genesis™",
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
       link: [
-        { rel: 'icon', href: "/favicon.png" },
-        { rel: 'manifest', href: "/manifest.json" }
+        { rel: "icon", href: "/favicon.png" },
+        { rel: "manifest", href: "/manifest.json" },
       ],
       meta: [
         {
-          property: 'og:site_name',
-          content: 'MOOD™',
+          property: "og:site_name",
+          content: "Genesis™",
         },
         {
-          name: 'theme-color',
-          content: '#d9934f',
+          name: "theme-color",
+          content: "#d9934f",
         },
       ],
     },
     htmlAttrs: {
-      'data-theme': 'cupcake'
+      "data-theme": "cupcake",
     },
   },
   router: {
-    middleware: ['auth-callback']
-  }
-})
+    middleware: ["auth-callback"],
+  },
+});
