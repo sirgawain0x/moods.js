@@ -9,10 +9,10 @@ const { data: undergroundData } = await useFetch(
 
 <template>
   <div class="flex flex-col items-center justify-center">
-    <h1 class="text-center text-6xl font-black my-8">Welcome to GENISIS</h1>
+    <h1 class="text-center text-6xl font-black my-8">Welcome to GENESIS</h1>
     <SearchBull placeholderText="What's that song?" />
-    <p class="my-2">Feeling Lucky?</p>
-    <NuxtLink class="btn btn-primary" to="/">Randomize</NuxtLink>
+    <p class="my-3 text-sm">Feeling Lucky?</p>
+    <NuxtLink class="btn btn-primary" to="/">Random</NuxtLink>
   </div>
   <div class="mx-2 lg:mx-8">
     <h1 class="text-3xl lg:text-4xl font-black mt-6">Discover New Curators</h1>
@@ -20,17 +20,17 @@ const { data: undergroundData } = await useFetch(
       <MoodCard
         gradient="from-green-500 via-green-700 to-green-900"
         icon="ph:leaf-fill"
-        name="XXX<br>XXX"
+        name="Fresh<br>Releases"
       />
       <MoodCard
         gradient="from-red-500 via-red-700 to-red-900"
         icon="ph:fire-fill"
-        name="Rage Enabled "
+        name="Rage Enabled"
       />
       <MoodCard
         gradient="from-blue-300 via-blue-500 to-blue-700"
         icon="ic:baseline-water-drop"
-        name="[bing]<br>Chillin'"
+        name="Just<br>Chillin'"
       />
       <MoodCard
         gradient="from-cyan-200 via-sky-300 to-blue-300"
@@ -40,32 +40,32 @@ const { data: undergroundData } = await useFetch(
       <MoodCard
         gradient="from-violet-950 via-violet-800 to-sky-900"
         icon="ph:moon-fill"
-        name="XXX<br>XXX"
+        name="Bedtime<br>Melodies"
       />
       <MoodCard
         gradient="from-fuchsia-400 via-pink-500 to-rose-600"
         icon="fluent:dust-28-filled"
-        name="You'r<br>Weirdo"
+        name="Weird<br>Vibes"
       />
       <MoodCard
         gradient="from-orange-300 via-orange-400 to-amber-600"
         icon="streamline:flash-2-solid"
-        name="XXX<br>XXX"
+        name="Rockstar<br>Energy"
       />
       <MoodCard
         gradient="from-orange-800 via-amber-900 to-rose-950"
         icon="streamline:bomb-solid"
-        name="XXX<br>XXX"
+        name="Bomb<br>Hits"
       />
       <MoodCard
         gradient="from-amber-300 via-amber-400 to-yellow-500"
         icon="heroicons:sparkles-20-solid"
-        name="XXX<br>XXX"
+        name="Dance<br>Floor"
       />
       <MoodCard
         gradient="from-slate-300 via-slate-400 to-slate-500"
         icon="fluent:weather-duststorm-24-filled"
-        name="XXX<br>XXX"
+        name="Blowin'<br>Trees"
       />
 
       <div
@@ -76,7 +76,7 @@ const { data: undergroundData } = await useFetch(
         >
           <Icon name="streamline:add-circle-solid" class="text-base-100" />
         </div>
-        <h1 class="text-xl font-black text-center mb-2">Comming Soon...</h1>
+        <h1 class="text-xl font-black text-center mb-2">Coming Soon...</h1>
       </div>
     </div>
 

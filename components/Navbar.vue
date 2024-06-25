@@ -60,7 +60,7 @@ const user = ref(useCookie("user").value);
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1 gap-2 align-bottom">
         <li>
-          <NuxtLink to="/info"> <Icon name="ph:info-fill" /> Infos </NuxtLink>
+          <NuxtLink to="/info"> <Icon name="ph:info-fill" /> Info </NuxtLink>
         </li>
         <li>
           <SearchBull placeholderText="Search..." />
@@ -136,7 +136,7 @@ const user = ref(useCookie("user").value);
     <div class="modal-box bg-base-300">
       <div class="grid grid-cols-5 gap-2 col-span-2">
         <SearchBull
-          placeholderText="Search on MOOD™..."
+          placeholderText="Search on Genesis™..."
           @submit.prevent="handleModalClick()"
         />
         <ThemeDropdown />
