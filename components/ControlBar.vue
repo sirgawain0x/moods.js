@@ -53,7 +53,7 @@ const getTrackData = (trackId: string) => {
 const getBulkData = () => {
   fetch(
     "https://audius-discovery-6.cultur3stake.com/v1/tracks?" +
-      state.playlist.map((item) => `id=${item}`).join("&") +
+      state.playlist.map((item: any) => `id=${item}`).join("&") +
       "&app_name=MOODS-TM",
     {
       method: "GET",

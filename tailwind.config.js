@@ -11,19 +11,16 @@ export default {
   theme: {
     extend: {},
     fontFamily: {
-      sans: ['Lexend', 'sans-serif'],
-      serif: ['Lexend', 'serif'],
+      sans: ["Lexend", "sans-serif"],
+      serif: ["Lexend", "serif"],
     },
   },
-  plugins: [
-    require('daisyui'),
-  ],
+  plugins: [require("daisyui")],
 
   daisyui: {
-    themes: ['cupcake', 'coffee'],
+    themes: ["cmyk", "coffee"],
     darkTheme: "coffee",
-    logs: false, 
+    logs: false,
   },
-  darkMode: ['class', '[data-theme="coffee"]']
-}
-
+  darkMode: ["class", '[data-theme="coffee"]'],
+};
