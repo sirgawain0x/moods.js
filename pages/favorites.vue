@@ -51,13 +51,16 @@ const { data: bulkTracksData } = await useFetch(
         class="btn btn-primary mx-10 rounded-lg"
         @click="addAllToPlaylist()"
       >
-        <Icon name="streamline:add-layer-2-solid" /> Play Next
+        <Icon name="streamline:add-layer-2-solid" /> Play All Next
       </button>
     </h2>
 
     <div class="mx-2 lg:mx-10" v-if="bulkTracksData">
       <p v-for="(track, index) in bulkTracksData.data">
-        <SongCard :trackParsedData="bulkTracksData.data[index]" />
+        <SongCard
+          :key="track.id"
+          :trackParsedData="bulkTracksData.data[index]"
+        />
       </p>
     </div>
   </div>
