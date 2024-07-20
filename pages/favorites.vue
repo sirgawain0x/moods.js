@@ -6,7 +6,7 @@ const { $auth } = useNuxtApp();
 
 const route = useRoute();
 const user = ref(useCookie("user").value);
-let blukList = Array<string>();
+let bulkList = Array<string>();
 
 const login = () => {
   $auth.login();
@@ -17,29 +17,29 @@ if (!user) {
 }
 
 const { data: favoritesData } = await useFetch(
-  "https://discovery-au-02.audius.openplayer.org/v1/users/" +
-    user.value.userId +
-    "/favorites?app_name=MOODS-TM"
+  "https://discovery-us-01.audius.openplayer.org/v1/users/" +
+    user.value?.userId +
+    "/favorites?app_name=GENESIS-TM"
 );
 
 const addAllToPlaylist = () => {
   console.log("Loading Playlist...");
-  for (let i = 0; i < favoritesData.value.data.length; i++) {
-    addTrackToPlaylist(favoritesData.value.data[i].favorite_item_id);
+  for (let i = 0; i < favoritesData.value?.data.length; i++) {
+    addTrackToPlaylist(favoritesData.value?.data[i].favorite_item_id);
   }
   console.log("Playlist Loaded!");
 };
 
-for (let i = 0; i < favoritesData.value.data.length; i++) {
-  if (favoritesData.value.data[i].favorite_type === "SaveType.track") {
-    blukList.push(favoritesData.value.data[i].favorite_item_id);
-    blukList.push("&id=");
+for (let i = 0; i < favoritesData.value?.data.length; i++) {
+  if (favoritesData.value?.data[i].favorite_type === "SaveType.track") {
+    bulkList.push(favoritesData.value?.data[i].favorite_item_id);
+    bulkList.push("&id=");
   }
 }
 const { data: bulkTracksData } = await useFetch(
-  "https://discovery-au-02.audius.openplayer.org/v1/tracks?id=" +
-    "".concat(...blukList) +
-    "&app_name=MOODS-TM"
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks?id=" +
+    "".concat(...bulkList) +
+    "&app_name=GENESIS-TM"
 );
 </script>
 
@@ -56,7 +56,7 @@ const { data: bulkTracksData } = await useFetch(
     </h2>
 
     <div class="mx-2 lg:mx-10" v-if="bulkTracksData">
-      <p v-for="(track, index) in bulkTracksData.data">
+      <p v-for="(track, index) in bulkTracksData.data" :key="index">
         <SongCard
           :key="track.id"
           :trackParsedData="bulkTracksData.data[index]"

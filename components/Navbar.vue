@@ -70,6 +70,11 @@ const user = ref(useCookie("user").value);
             <Icon name="ph:github-logo-fill" /> Code
           </a>
         </li>
+        <li>
+          <a href="https://feedback.creativeplatform.xyz" target="_blank">
+            <Icon name="ph:bug-beetle-fill" /> Report Bugs
+          </a>
+        </li>
       </ul>
     </div>
     <div class="navbar-end">

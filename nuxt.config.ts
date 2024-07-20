@@ -31,9 +31,9 @@ export default defineNuxtConfig({
           content: "#d9934f",
         },
       ],
-    },
-    htmlAttrs: {
-      "data-theme": "cupcake",
+      htmlAttrs: {
+        "data-theme": "cupcake",
+      },
     },
   },
   router: {
