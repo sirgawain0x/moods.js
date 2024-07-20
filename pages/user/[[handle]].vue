@@ -4,25 +4,25 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 
-const { data: requestData } = await useFetch(
-  "https://discovery-au-02.audius.openplayer.org/v1/users/handle/" +
+const { data: requestData }: { data: any } = await useFetch(
+  "https://discovery-us-01.audius.openplayer.org/v1/users/handle/" +
     route.params.handle +
-    "?app_name=MOODS-TM"
+    "?app_name=GENESIS-TM"
 );
 const { data: artistData } = await useFetch(
   "https://discoveryprovider2.audius.co/v1/users/" +
-    requestData.value.data.id +
-    "/tracks?app_name=MOODS-TM&limit=1000"
+    requestData.value?.data.id +
+    "/tracks?app_name=GENESIS-TM&limit=1000"
 );
 const { data: pinnedData } = await useFetch(
   "https://discoveryprovider2.audius.co/v1/tracks/" +
-    requestData.value.data.artist_pick_track_id +
-    "?app_name=MOODS-TM&limit=1000"
+    requestData.value?.data.artist_pick_track_id +
+    "?app_name=GENESIS-TM&limit=1000"
 );
 const { data: repostData } = await useFetch(
   "https://discoveryprovider2.audius.co/v1/users/" +
-    requestData.value.data.id +
-    "/reposts?app_name=MOODS-TM&limit=1000"
+    requestData.value?.data.id +
+    "/reposts?app_name=GENESIS-TM&limit=1000"
 );
 </script>
 
@@ -51,7 +51,7 @@ const { data: repostData } = await useFetch(
       <div
         v-if="requestData?.data.id === 'aY1Alz'"
         class="tooltip"
-        data-tip="MOOD™ Team"
+        data-tip=" GENESIS™ Pick"
       >
         <Icon name="ri:verified-badge-fill" class="text-cyan-300" />
       </div>
@@ -89,7 +89,7 @@ const { data: repostData } = await useFetch(
         checked
       />
       <div role="tabpanel" class="tab-content">
-        <p v-for="(track, index) in artistData.data">
+        <p v-for="(track, index) in artistData.data" :key="index">
           <SongCard :trackParsedData="artistData.data[index]" />
         </p>
       </div>
@@ -102,7 +102,7 @@ const { data: repostData } = await useFetch(
         aria-label="Reposts"
       />
       <div role="tabpanel" class="tab-content">
-        <p v-for="(track, index) in repostData.data">
+        <p v-for="(track, index) in repostData.data" :key="index">
           <SongCard
             v-if="repostData.data[index].item_type === 'track'"
             :trackParsedData="repostData.data[index].item"

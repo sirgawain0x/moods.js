@@ -26,14 +26,14 @@
         </a>
       </div>
     </nav>
-    <p class="text-primary" href="https://f.dreamclouds.fr/dreamcode">
+    <!-- <p class="text-primary" href="https://f.dreamclouds.fr/dreamcode">
       DreamCode: FLIXSAN
-    </p>
+    </p> -->
   </footer>
 </template>
 
 <script lang="ts" setup>
 const { data: hash } = await useFetch(
-  "https://api.github.com/repos/DreamCloud-Development/moods.js/commits/main"
+  "https://api.github.com/repos/creativeplatform/moods.js/commits/main"
 );
 </script>

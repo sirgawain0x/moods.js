@@ -30,7 +30,7 @@ useHead({
       <p class="mb-4 text-3xl tracking-tight font-bold">Something's missing.</p>
       <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
         Or you mispelled, or I fu*&$d up. In both cases, you should
-        <NuxtLink to="/" class="underline">go back to the home page</NuxtLink>,
+        <NuxtLink to="/" class="underline">go back to the homepage</NuxtLink>,
         to be safe
       </p>
       <NuxtLink class="btn btn-primary" to="/">Yup, take me home </NuxtLink>

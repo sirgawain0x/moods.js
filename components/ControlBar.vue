@@ -7,7 +7,7 @@ import {
 } from "~/stores/playlist";
 import { watch } from "vue";
 
-let audioPlayer = ref(null);
+let audioPlayer = ref<HTMLAudioElement | null>(null);
 const trackData = ref("string");
 let mediaData;
 const bulkTrackData = ref(null);
@@ -20,7 +20,7 @@ const currentVolume = ref(1);
 
 const playlist = computed({
   get: () => state.playlist,
-  set: (value) => addTrackToPlaylist(value),
+  set: (value) => addTrackToPlaylist(value[0]),
 });
 
 const index = computed({
@@ -32,7 +32,7 @@ const getTrackData = (trackId: string) => {
   fetch(
     "https://audius-discovery-6.cultur3stake.com/v1/tracks/" +
       trackId +
-      "?app_name=MOODS-TM",
+      "?app_name=GENESIS-TM",
     {
       method: "GET",
     }
@@ -54,7 +54,7 @@ const getBulkData = () => {
   fetch(
     "https://audius-discovery-6.cultur3stake.com/v1/tracks?" +
       state.playlist.map((item: any) => `id=${item}`).join("&") +
-      "&app_name=MOODS-TM",
+      "&app_name=GENESIS-TM",
     {
       method: "GET",
     }
@@ -72,15 +72,17 @@ const getBulkData = () => {
 
 watch(index, (newValue, oldValue) => {
   console.log("Index updated", newValue, oldValue);
-  audioPlayer = new Audio(
+  audioPlayer.value = new Audio(
     "https://audius-discovery-4.theblueprint.xyz/v1/tracks/" +
       state.playlist[state.playlistIndex] +
       "/stream"
   );
-  audioPlayer.addEventListener("ended", handleNextTrack);
-  audioPlayer.addEventListener("timeupdate", updateMusicBar);
-  audioPlayer.volume = currentVolume.value;
-  audioPlayer.play();
+  audioPlayer.value?.addEventListener("ended", handleNextTrack);
+  audioPlayer.value?.addEventListener("timeupdate", updateMusicBar);
+  if (audioPlayer.value) {
+    audioPlayer.value.volume = currentVolume.value;
+  }
+  audioPlayer.value?.play();
   getTrackData(state.playlist[state.playlistIndex]);
 });
 
@@ -92,8 +94,10 @@ watch(state.playlist, (newValue, oldValue) => {
 });
 
 const updateMusicBar = () => {
-  currentTime.value = audioPlayer.currentTime;
-  musicBarWidth.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+  currentTime.value = audioPlayer.value?.currentTime ?? 0;
+  musicBarWidth.value = audioPlayer.value?.duration
+    ? (audioPlayer.value.currentTime / audioPlayer.value.duration) * 100
+    : 0;
 };
 
 const handleNextTrack = () => {
@@ -105,8 +109,10 @@ const handleNextTrack = () => {
   } else {
     if (isLooped.value === true) {
       if (currentIndex === 0) {
-        audioPlayer.currentTime = 0;
-        audioPlayer.play();
+        if (audioPlayer.value) {
+          audioPlayer.value.currentTime = 0;
+        }
+        audioPlayer.value?.play();
         console.log("Looping the playlist, but a single track is playing");
       } else {
         setPlaylistIndex(0);
@@ -119,10 +125,10 @@ const handleNextTrack = () => {
 };
 
 const playPauseButton = () => {
-  if (audioPlayer.paused) {
-    audioPlayer.play();
+  if (audioPlayer.value?.paused) {
+    audioPlayer.value?.play();
   } else {
-    audioPlayer.pause();
+    audioPlayer.value?.pause();
   }
   isPlaying.value = !isPlaying.value;
 };
@@ -137,23 +143,25 @@ const loopButton = () => {
 
 const skipTrack = () => {
   if (state.playlistIndex + 1 < playlist.value.length) {
-    audioPlayer.pause();
+    audioPlayer.value?.pause();
     setPlaylistIndex(state.playlistIndex + 1);
   }
 };
 
 const redoTrack = () => {
   if (state.playlistIndex > 0) {
-    audioPlayer.pause();
+    audioPlayer.value?.pause();
     setPlaylistIndex(state.playlistIndex - 1);
   }
 };
 
 const updateCurrentVolume = () => {
-  audioPlayer.volume = currentVolume.value;
+  if (audioPlayer.value) {
+    audioPlayer.value.volume = currentVolume.value;
+  }
 };
 
-function setupMediaSession(superTrackData) {
+function setupMediaSession(superTrackData: any) {
   if (navigator.mediaSession) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: superTrackData.title,
@@ -173,10 +181,10 @@ function setupMediaSession(superTrackData) {
     });
 
     navigator.mediaSession.setActionHandler("play", () => {
-      audioPlayer.play();
+      audioPlayer.value?.play();
     });
     navigator.mediaSession.setActionHandler("pause", () => {
-      audioPlayer.pause();
+      audioPlayer.value?.pause();
     });
 
     navigator.mediaSession.setActionHandler("previoustrack", () => {
@@ -354,9 +362,11 @@ function setupMediaSession(superTrackData) {
               <div class="modal-box h-96 w-96 relative overflow-y-auto">
                 <h3 class="font-bold text-lg">My Queue</h3>
                 <div v-if="state.playlistIndex != -1">
-                  <div v-if="bulkTrackData" v-for="track in bulkTrackData">
-                    <SongCardMinimal :trackParsedData="track" />
-                  </div>
+                  <template v-if="bulkTrackData">
+                    <div v-for="track in bulkTrackData" :key="track.id">
+                      <SongCardMinimal :trackParsedData="track" />
+                    </div>
+                  </template>
                 </div>
                 <div class="flex justify-center gap-2 z-10 sticky bottom-0">
                   <button
