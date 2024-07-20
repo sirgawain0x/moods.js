@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const { data: trendingData } = await useFetch(
-  "https://discovery-au-02.audius.openplayer.org/v1/tracks/trending?time=week&limit=20&app_name=MOODS-TM"
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending?time=week&limit=20&app_name=GENESIS-TM"
 );
 </script>
 
@@ -14,14 +14,14 @@ const { data: trendingData } = await useFetch(
         to="/"
         class="self-end text-xl lg:text-2xl font-black mt-14 text-end"
       >
-        Back Home
+        Back to Home
       </NuxtLink>
     </div>
     <div
       class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
       v-if="trendingData"
     >
-      <div class="relative" v-for="track in trendingData.data">
+      <div class="relative" v-for="track in trendingData.data" :key="track.id">
         <img
           :src="track.artwork['480x480']"
           alt="IMAGE"

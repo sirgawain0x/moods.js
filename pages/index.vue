@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 const { data: trendingData } = await useFetch(
-  "https://discovery-au-02.audius.openplayer.org/v1/tracks/trending?time=week&limit=20&app_name=MOODS-TM"
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending?time=week&limit=20&app_name=GENESIS-TM"
 );
 const { data: undergroundData } = await useFetch(
-  "https://discovery-au-02.audius.openplayer.org/v1/tracks/trending/underground?time=week&limit=20&app_name=MOODS-TM"
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending/underground?time=week&limit=20&app_name=GENESIS-TM"
 );
 </script>
 

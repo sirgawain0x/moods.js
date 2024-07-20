@@ -66,7 +66,7 @@
       integrate more music platforms, and build a thriving music community.
     </p>
     <NuxtLink class="btn btn-primary mt-4" to="/"
-      >Back to tha home page</NuxtLink
+      >Back to tha homepage</NuxtLink
     >
   </div>
 </template>
