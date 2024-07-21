@@ -20,11 +20,13 @@ const { data: trackData } = await useFetch(
       :src="trackData.data.artwork['480x480']"
       alt="Cover Image"
     />
-    <h1 class="absolute bottom-12 left-44 font-bold text-xl lg:text-3xl">
+    <h1
+      class="absolute bottom-12 left-44 font-bold text-pink-600 text-xl lg:text-3xl"
+    >
       {{ trackData.data.title }}
     </h1>
     <h2
-      class="absolute bottom-3 left-44 text-md lg:text-xl glass p-1 rounded-lg"
+      class="absolute bottom-3 left-44 text-md text-slate-300 lg:text-xl glass p-1 rounded-lg"
     >
       {{ trackData.data.play_count }} Listenings -
       {{ trackData.data.favorite_count }} Likes
