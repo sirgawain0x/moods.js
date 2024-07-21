@@ -11,7 +11,7 @@
           >Open Source</span
         ><br />
       </p>
-      <p>Copyright © 2024 Creative Organization DAO - All right reserved</p>
+      <p>Copyright © 2024 Creative Organization DAO</p>
     </aside>
     <nav>
       <div class="grid grid-flow-col gap-4 text-3xl">
