@@ -26,9 +26,6 @@
         </a>
       </div>
     </nav>
-    <!-- <p class="text-primary" href="https://f.dreamclouds.fr/dreamcode">
-      DreamCode: FLIXSAN
-    </p> -->
   </footer>
 </template>
 
