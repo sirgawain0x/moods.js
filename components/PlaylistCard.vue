@@ -3,7 +3,7 @@
     <figure class="hidden lg:flex">
       <img
         class="h-32 w-32 rounded-l-none hidden lg:flex"
-        :src="trackParsedData.artwork['480x480']"
+        :src="trackParsedData?.artwork?.['480x480']"
         alt="Cover Image"
       />
     </figure>
@@ -11,19 +11,19 @@
       <NuxtLink :to="'/playlist/' + trackParsedData.id">
         <h2 class="text-base lg:text-lg card-title">
           <Icon name="streamline:music-folder-song-solid" />{{
-            trackParsedData.playlist_name
+            trackParsedData?.playlist_name
           }}
         </h2>
       </NuxtLink>
       <p class="font-normal">
-        <NuxtLink :to="'/user/' + trackParsedData.user.handle">
+        <NuxtLink :to="'/handle/' + trackParsedData?.user?.handle">
           <Icon name="ph:person-fill" />
-          {{ trackParsedData.user.name }}
+          {{ trackParsedData?.user?.name }}
         </NuxtLink>
       </p>
     </div>
     <div class="mr-2 lg:mr-8 start-2 flex items-center">
-      <PlaylistButton :playlistId="trackParsedData.id" />
+      <PlaylistButton :playlistId="trackParsedData?.id" />
     </div>
   </div>
 </template>

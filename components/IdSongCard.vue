@@ -18,7 +18,7 @@ import type { Track } from "~/types/getTrack";
         <h2 class="card-title">{{ trackParsedData.title }}</h2>
       </NuxtLink>
       <p>
-        <NuxtLink :to="'/user/' + trackParsedData?.user.name">
+        <NuxtLink :to="'/handle/' + trackParsedData?.user?.handle">
           <Icon name="ph:person-fill" />
           {{ trackParsedData.user.name }}
         </NuxtLink>
@@ -34,11 +34,11 @@ import type { Track } from "~/types/getTrack";
         }}
         <span class="font-black"> - </span>
         <Icon name="ph:play-fill" />
-        {{ trackParsedData.play_count }} Ecoutes
+        {{ trackParsedData.play_count }} Plays
       </p>
     </div>
     <figure class="mr-8">
-      <PlayButton :trackId="trackParsedData.id" />
+      <PlayButton :key="trackParsedData.id" :trackId="trackParsedData.id" />
     </figure>
   </div>
 </template>

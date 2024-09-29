@@ -41,6 +41,6 @@ const { data: trackData } = await useFetch<{ data: Track }>(
     </h3>
   </div>
   <div class="card m-8">
-    <SongCard :trackParsedData="trackData?.data" />
+    <SongCard :key="trackData?.data?.id" :trackParsedData="trackData" />
   </div>
 </template>

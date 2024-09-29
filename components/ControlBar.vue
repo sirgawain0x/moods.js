@@ -40,13 +40,14 @@ const getTrackData = (trackId: string) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      // Handle the JSON data
-      trackData.value = data.data;
-      setupMediaSession(data.data);
-      return data.data;
+      if (data && data.data) {
+        trackData.value = data.data;
+        setupMediaSession(data.data);
+      } else {
+        console.error("Track data not found");
+      }
     })
     .catch((error) => {
-      // Handle any errors
       console.error(error);
     });
 };
@@ -62,11 +63,13 @@ const getBulkData = () => {
   )
     .then((response) => response.json())
     .then((data) => {
-      // Handle the JSON data
-      bulkTrackData.value = data.data;
+      if (data && data.data) {
+        bulkTrackData.value = data.data;
+      } else {
+        console.error("Bulk track data not found");
+      }
     })
     .catch((error) => {
-      // Handle any errors
       console.error(error);
     });
 };
@@ -217,8 +220,8 @@ function setupMediaSession(superTrackData: any) {
           </span>
           <br />
           <span class="text-sm">
-            <NuxtLink :to="'/user/' + trackData?.user.handle">
-              <Icon name="ph:person-fill" /> {{ trackData?.user.name }}
+            <NuxtLink :to="`/handle/${trackData?.user?.handle}`">
+              <Icon name="ph:person-fill" /> {{ trackData?.user?.name }}
             </NuxtLink>
           </span>
         </div>

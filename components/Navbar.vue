@@ -63,6 +63,11 @@ const user = ref(useCookie("user").value);
           <NuxtLink to="/info"> <Icon name="ph:info-fill" /> Info </NuxtLink>
         </li>
         <li>
+          <NuxtLink href="https://news.creativeplatform.xyz">
+            <Icon name="ph:info-fill" /> Discover
+          </NuxtLink>
+        </li>
+        <li>
           <SearchBull placeholderText="Search..." />
         </li>
         <li>
@@ -84,11 +89,13 @@ const user = ref(useCookie("user").value);
       <NuxtLink
         v-if="user"
         class="ml-3 flex btn btn-ghost p-0 rounded-lg mt-1 px-1"
-        :to="'/user/' + user.handle"
+        :to="'/handle/' + user.handle"
       >
         <div class="mr-1 leading-none flex flex-col justify-end items-end">
           <h1 class="font-semibold">{{ user.name }}</h1>
-          <p class="text-sm" :to="'/user/' + user.handle">@{{ user.handle }}</p>
+          <p class="text-sm" :to="'/handle/' + user.handle">
+            @{{ user.handle }}
+          </p>
         </div>
         <img
           :src="user.profilePicture['480x480']"
@@ -165,8 +172,7 @@ const user = ref(useCookie("user").value);
         </NuxtLink>
 
         <NuxtLink
-          @click="handleModalClick()"
-          to="/moods"
+          href="https://news.creativeplatform.xyz"
           class="flex rounded-lg bg-base-100 h-20 justify-center items-center flex-col"
         >
           <Icon name="ic:baseline-water-drop" /> Discover
@@ -191,7 +197,7 @@ const user = ref(useCookie("user").value);
 
           <NuxtLink
             @click="handleModalClick()"
-            :to="'/user/' + user.handle"
+            :to="'/handle/' + user.handle"
             class="flex rounded-lg bg-base-100 h-20 justify-center items-center flex-col"
           >
             <Icon name="streamline:user-circle-single-solid" /> Profile

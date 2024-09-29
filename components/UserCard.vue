@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="'/user/' + userParsedData.handle"
+    :to="'/handle/' + userParsedData.handle"
     class="card card-side bg-base-300 border-2 border-primary-content mt-2"
   >
     <figure class="hidden lg:flex">

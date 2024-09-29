@@ -16,7 +16,7 @@
         </h2>
       </NuxtLink>
       <p class="font-normal">
-        <NuxtLink :to="'/user/' + trackParsedData.user.handle">
+        <NuxtLink :to="'/handle/' + trackParsedData.user.handle">
           <Icon name="ph:person-fill" />
           {{ trackParsedData.user.name }}
         </NuxtLink>

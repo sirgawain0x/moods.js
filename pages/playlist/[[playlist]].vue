@@ -2,6 +2,7 @@
 import { state, addTrackToPlaylist } from "~/stores/playlist";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+import type { BulkResponse } from "~/types/getBulkTracks";
 
 let bulkList = Array<string>();
 const route = useRoute();
@@ -17,36 +18,37 @@ const { data: playlistTracksData }: { data: any } = await useFetch(
     "&app_name=GENESIS-TM"
 );
 
-const getPlaylistTrackData = (trackId: string) => {
-  fetch(
-    "https://audius-discovery-6.cultur3stake.com/v1/tracks/" +
-      trackId +
-      "?app_name=GENESIS-TM",
-    {
-      method: "GET",
-    }
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      // Handle the JSON data
-      return data.data;
-    })
-    .catch((error) => {
-      // Handle any errors
-      console.error(error);
-    });
+const getPlaylistTrackData = async (trackId: string) => {
+  // {{ edit_4 }}
+  try {
+    const response = await fetch(
+      "https://audius-discovery-6.cultur3stake.com/v1/tracks/" +
+        trackId +
+        "?app_name=GENESIS-TM",
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    return data.data; // {{ edit_5 }}
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-const addAllToPlaylist = () => {
+const addAllToPlaylist = async () => {
+  // {{ edit_1 }}
   console.log("Loading Playlist...");
   for (
     let i = 0;
     i < playlistTracksData.value?.data[0].playlist_contents.length;
     i++
   ) {
-    addTrackToPlaylist(
-      playlistTracksData.value?.data[0].playlist_contents[i].track_id
-    );
+    const trackId =
+      playlistTracksData.value?.data[0].playlist_contents[i].track_id; // {{ edit_2 }}
+    addTrackToPlaylist(trackId);
+    const trackData = await getPlaylistTrackData(trackId); // {{ edit_3 }}
+    // You can process trackData here if needed
   }
   console.log("Playlist Loaded!");
 };
@@ -61,7 +63,7 @@ for (
   );
   bulkList.push("&id=");
 }
-const { data: bulkTracksData } = await useFetch(
+const { data: bulkTracksData } = await useFetch<BulkResponse>(
   "https://discovery-us-01.audius.openplayer.org/v1/tracks?id=" +
     "".concat(...bulkList) +
     "&app_name=GENESIS-TM"
@@ -105,8 +107,11 @@ const { data: bulkTracksData } = await useFetch(
       <Icon name="streamline:add-layer-2-solid" /> Play Next
     </button>
 
-    <p v-for="(track, index) in bulkTracksData.data" :key="index">
-      <SongCard :trackParsedData="bulkTracksData.data[index]" />
+    <p v-for="(track, index) in bulkTracksData?.data" :key="index">
+      <SongCard
+        :key="track?.id"
+        :trackParsedData="bulkTracksData?.data[index]"
+      />
     </p>
   </div>
 </template>
