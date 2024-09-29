@@ -8,7 +8,7 @@
       />
     </div>
     <div class="text-xs col-span-2 font-black flex align-middle">
-      <NuxtLink :to="'/user/' + trackParsedData.user.handle">
+      <NuxtLink :to="'/handle/' + trackParsedData.user.handle">
         <Icon name="ph:person-fill" />
         {{ trackParsedData.user.name }}
       </NuxtLink>

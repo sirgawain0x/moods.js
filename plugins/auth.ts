@@ -3,14 +3,14 @@ import axios from "axios";
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
   const login = () => {
+    const state = crypto.getRandomValues(new Uint8Array(16)).join("");
     const params = new URLSearchParams({
       scope: "write",
       api_key: "2dc08a0185c0fc463adfe83a923e5a4210a90a43",
-      apiSecret: `${process.env.AUDIUS_API_SECRET}`,
       redirect_uri: `${window.location.origin}/callback`,
       origin: window.location.origin,
-      state: "SuperDupperSecretState",
-      response_mode: "query",
+      state: state,
+      display: "popup",
     });
     window.location.href = `https://audius.co/oauth/auth?${params.toString()}`;
   };

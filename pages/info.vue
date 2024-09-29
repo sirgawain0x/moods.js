@@ -20,7 +20,7 @@
       How does GENESIS benefit from using Audius?
     </h1>
     <p class="text-center mt-4" style="width: 50%">
-      Audius' decentralized nature means we don't need extensive server
+      Audius's decentralized nature means we don't need extensive server
       infrastructure to host your playlists. This translates to lower operating
       costs, enabling us to focus on building a great app experience and
       supporting independent artists.
@@ -34,17 +34,42 @@
     <h1 class="text-center text-6xl font-black mt-8">How does it work?</h1>
     <p class="text-center mt-4" style="width: 50%">
       Genesis is designed to foster a vibrant music community where everyone
-      benefits. Here's how it works: For Music Lovers: Explore curated
-      playlists, discover new artists and genres, and connect with passionate
-      music curators. Support your favorite creators by purchasing exclusive
-      content in the marketplace. For Music Creators: Sign up for a creator
-      subscription to submit your playlists and tracks. Earn revenue based on
-      the traffic your content generates. Access analytics, promotional tools,
-      and engage with your audience. Sell exclusive content in the marketplace.
-      Our Technology: Genesis leverages the decentralized nature of Audius to
-      minimize server fees and keep the app sustainable. We currently host the
-      app on free tiers of popular platforms like Render, Vercel, or Netlify
-      with plans to use Fleek.
+      benefits. Here's how it works:
+    </p>
+    <p
+      class="text-center mt-2 text-sm text-gray-400 dark:text-amber-800"
+      style="width: 50%"
+    >
+      For Music Lovers:
+    </p>
+    <ul class="list-disc list-inside">
+      <li>Explore curated playlists and discover new artists and genres.</li>
+      <li>Connect with passionate music curators.</li>
+      <li>Support your favorite artists by reposting and tipping them.</li>
+    </ul>
+    <p
+      class="text-center mt-2 text-sm text-gray-400 dark:text-amber-800"
+      style="width: 50%"
+    >
+      For Music Creators:
+    </p>
+    <ul class="list-disc list-inside">
+      <li>Submit your music to our platform for curation.</li>
+      <li>Earn tips from listeners and support from the community.</li>
+      <li>Build a loyal fanbase and grow your audience.</li>
+      <li>Get featured on our homepage and reach a wider audience.</li>
+    </ul>
+    <p
+      class="text-center mt-2 text-sm text-gray-400 dark:text-amber-800"
+      style="width: 50%"
+    >
+      Our Technology:
+    </p>
+    <p class="text-center mt-4" style="width: 50%">
+      Genesis leverages the decentralized nature of Audius to minimize server
+      fees and keep the app sustainable. We currently host the app on free tiers
+      of popular platforms like Render, Vercel, or Netlify, with plans to use
+      Fleek.
     </p>
     <h1 class="text-center text-6xl font-black mt-8">
       How is this sustainable?
@@ -55,18 +80,27 @@
     >
       Beaucause yeah - no ads and no subscription for content.
     </p>
-    <p class="text-center mt-4" style="width: 50%">
+    <p class="text-center my-4" style="width: 50%">
       Genesis thrives on a balanced ecosystem that supports both creators and
-      users: Creator Subscriptions: Subscription fees from creators provide a
-      consistent revenue stream that covers our operational costs, including
-      hosting and development. Marketplace Transactions: A portion of each
-      marketplace transaction goes towards supporting Genesis. This ensures the
-      platform can continue to grow and offer new features. Community Support:
-      Your donations play a crucial role in helping us expand our services,
-      integrate more music platforms, and build a thriving music community.
+      users:
     </p>
-    <NuxtLink class="btn btn-primary mt-4" to="/"
-      >Back to tha homepage</NuxtLink
-    >
+    <ul class="list-disc list-inside text-center" style="width: 50%">
+      <li>
+        Creator Subscriptions: Subscription fees from creators provide a
+        consistent revenue stream that covers our operational costs, including
+        hosting and development.
+      </li>
+      <li>
+        Marketplace Transactions: A portion of each marketplace transaction goes
+        towards supporting Genesis. This ensures the platform can continue to
+        grow and offer new features.
+      </li>
+      <li>
+        Community Support: Your donations play a crucial role in helping us
+        expand our services, integrate more music platforms, and build a
+        thriving music community.
+      </li>
+    </ul>
+    <NuxtLink class="btn btn-primary mt-4" to="/">Back to Homepage</NuxtLink>
   </div>
 </template>

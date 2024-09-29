@@ -1,20 +1,102 @@
 <script lang="ts" setup>
-const { data: trendingData } = await useFetch(
-  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending?time=week&limit=20&app_name=GENESIS-TM"
+import type { TrendingResponse } from "~/types/trending";
+import type { UndergroundResponse } from "~/types/underground";
+
+//Weekly Trending
+const { data: trendingData } = await useFetch<TrendingResponse>(
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending",
+  {
+    query: {
+      time: "week",
+      app_name: "GENESIS-TM",
+    },
+  }
 );
-const { data: undergroundData } = await useFetch(
-  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending/underground?time=week&limit=20&app_name=GENESIS-TM"
+
+//Monthly Trending
+const { data: trendingDataMonth } = await useFetch<TrendingResponse>(
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending",
+  {
+    query: {
+      time: "month",
+      app_name: "GENESIS-TM",
+    },
+  }
+);
+
+//Yearly Trending
+const { data: trendingDataYear } = await useFetch<TrendingResponse>(
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending",
+  {
+    query: {
+      time: "year",
+      app_name: "GENESIS-TM",
+    },
+  }
+);
+
+// Alltime Trending
+const { data: trendingDataAlltime } = await useFetch<TrendingResponse>(
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending",
+  {
+    query: {
+      time: "allTime",
+      app_name: "GENESIS-TM",
+    },
+  }
+);
+
+// Top Underground
+const { data: undergroundData } = await useFetch<UndergroundResponse>(
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending/underground?time=week&limit=20&app_name=GENESIS-TM",
+  {
+    query: {
+      app_name: "GENESIS-TM",
+    },
+  }
 );
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center">
     <h1 class="text-center text-6xl font-black my-8">Welcome to GENESIS</h1>
-    <SearchBull placeholderText="What's that song?" />
+    <!-- <SearchBull placeholderText="What's that song?" />
     <p class="my-3 text-sm">Feeling Lucky?</p>
-    <NuxtLink class="btn btn-primary" to="/">Random</NuxtLink>
+    <NuxtLink class="btn btn-primary" to="/">Random</NuxtLink> -->
   </div>
   <div class="mx-2 lg:mx-8">
+    <div class="text-center">
+      <h1 class="text-3xl lg:text-5xl font-black mt-14">Top Tracks</h1>
+    </div>
+    <div
+      class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
+      v-if="trendingDataAlltime"
+    >
+      <div
+        class="relative"
+        v-for="track in trendingDataAlltime?.data.slice(0, 19)"
+        :key="track.id"
+      >
+        <img
+          :src="track?.artwork?.['480x480']"
+          :alt="track?.title || 'Track Artwork'"
+          class="h-24 w-24 lg:w-32 lg:h-32 rounded-lg"
+        />
+        <div class="absolute bottom-2 right-2">
+          <PlayButton :trackId="track.id" />
+        </div>
+      </div>
+      <NuxtLink
+        to="/trendingAlltime"
+        class="bg-[url('/img/rainbow.webp')] bg-center bg-cover rounded-lg flex justify-center flex-col items-center h-24 w-24 lg:w-32 lg:h-32"
+      >
+        <Icon
+          name="streamline:add-circle-solid"
+          class="text-4xl lg:text-6xl rounded-lg flex items-center justify-center"
+        />
+        <h1 class="font-bold mt-2">See All...</h1>
+      </NuxtLink>
+    </div>
     <h1 class="text-3xl lg:text-4xl font-black mt-6">Discover New Curators</h1>
     <div class="grid grid-cols-3 lg:grid-cols-8 mt-4 gap-4">
       <MoodCard
@@ -79,7 +161,6 @@ const { data: undergroundData } = await useFetch(
         <h1 class="text-xl font-black text-center mb-2">Coming Soon...</h1>
       </div>
     </div>
-
     <h1 class="text-3xl lg:text-4xl font-black mt-14">
       Weekly Trending Tracks
     </h1>
@@ -93,8 +174,8 @@ const { data: undergroundData } = await useFetch(
         :key="track.id"
       >
         <img
-          :src="track.artwork['480x480']"
-          alt="IMAGE"
+          :src="track?.artwork?.['480x480']"
+          :alt="track?.title || 'Track Artwork'"
           class="h-24 w-24 lg:w-32 lg:h-32 rounded-lg"
         />
         <div class="absolute bottom-2 right-2">
@@ -113,7 +194,71 @@ const { data: undergroundData } = await useFetch(
       </NuxtLink>
     </div>
     <h1 class="text-3xl lg:text-4xl font-black mt-14">
-      Weekly Underground Tracks
+      Monthly Trending Tracks
+    </h1>
+    <div
+      class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
+      v-if="trendingDataMonth"
+    >
+      <div
+        class="relative"
+        v-for="track in trendingDataMonth.data.slice(0, 19)"
+        :key="track.id"
+      >
+        <img
+          :src="track?.artwork?.['480x480']"
+          :alt="track?.title || 'Track Artwork'"
+          class="h-24 w-24 lg:w-32 lg:h-32 rounded-lg"
+        />
+        <div class="absolute bottom-2 right-2">
+          <PlayButton :trackId="track.id" />
+        </div>
+      </div>
+      <NuxtLink
+        to="/trendingMonth"
+        class="bg-[url('/img/rainbow.webp')] bg-center bg-cover rounded-lg flex justify-center flex-col items-center h-24 w-24 lg:w-32 lg:h-32"
+      >
+        <Icon
+          name="streamline:add-circle-solid"
+          class="text-4xl lg:text-6xl rounded-lg flex items-center justify-center"
+        />
+        <h1 class="font-bold mt-2">See All...</h1>
+      </NuxtLink>
+    </div>
+    <h1 class="text-3xl lg:text-4xl font-black mt-14">
+      Yearly Trending Tracks
+    </h1>
+    <div
+      class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
+      v-if="trendingDataYear"
+    >
+      <div
+        class="relative"
+        v-for="track in trendingDataYear.data.slice(0, 19)"
+        :key="track.id"
+      >
+        <img
+          :src="track?.artwork?.['480x480']"
+          :alt="track?.title || 'Track Artwork'"
+          class="h-24 w-24 lg:w-32 lg:h-32 rounded-lg"
+        />
+        <div class="absolute bottom-2 right-2">
+          <PlayButton :trackId="track.id" />
+        </div>
+      </div>
+      <NuxtLink
+        to="/trendingYear"
+        class="bg-[url('/img/rainbow.webp')] bg-center bg-cover rounded-lg flex justify-center flex-col items-center h-24 w-24 lg:w-32 lg:h-32"
+      >
+        <Icon
+          name="streamline:add-circle-solid"
+          class="text-4xl lg:text-6xl rounded-lg flex items-center justify-center"
+        />
+        <h1 class="font-bold mt-2">See All...</h1>
+      </NuxtLink>
+    </div>
+    <h1 class="text-3xl lg:text-4xl font-black mt-14">
+      Top Underground Tracks
     </h1>
     <div
       class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
@@ -125,8 +270,8 @@ const { data: undergroundData } = await useFetch(
         :key="track.id"
       >
         <img
-          :src="track.artwork['480x480']"
-          alt="IMAGE"
+          :src="track?.artwork?.['480x480']"
+          :alt="track?.title || 'Track Artwork'"
           class="h-24 w-24 lg:w-32 lg:h-32 rounded-lg"
         />
         <div class="absolute bottom-2 right-2">

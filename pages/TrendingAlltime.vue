@@ -5,7 +5,7 @@ const { data: trendingData } = await useFetch<TrendingResponse>(
   "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending",
   {
     query: {
-      time: "week",
+      time: "allTime",
       limit: 20,
       app_name: "GENESIS-TM",
     },
@@ -16,9 +16,7 @@ const { data: trendingData } = await useFetch<TrendingResponse>(
 <template>
   <div class="mx-2 lg:mx-8">
     <div class="grid grid-cols-2">
-      <h1 class="text-3xl lg:text-4xl font-black mt-14">
-        Weekly Trending Tracks
-      </h1>
+      <h1 class="text-3xl lg:text-4xl font-black mt-14">Top Tracks</h1>
       <NuxtLink
         to="/"
         class="self-end text-xl lg:text-2xl font-black mt-14 text-end"

@@ -28,9 +28,3 @@
     </nav>
   </footer>
 </template>
-
-<script lang="ts" setup>
-const { data: hash } = await useFetch(
-  "https://api.github.com/repos/creativeplatform/moods.js/commits/main"
-);
-</script>
