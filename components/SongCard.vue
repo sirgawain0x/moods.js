@@ -12,12 +12,12 @@
     <figure class="hidden lg:flex">
       <img
         class="h-32 w-32 rounded-l-none hidden lg:flex"
-        :src="trackParsedData.artwork['480x480']"
-        alt="Cover Image"
+        :src="trackParsedData?.artwork?.['480x480'] || '/music-banner.jpg'"
+        :alt="trackParsedData?.title"
       />
     </figure>
     <div class="card-body col-span-2 p-2 lg:p-5">
-      <NuxtLink :to="'/track/' + trackParsedData.id">
+      <NuxtLink :to="'/track/' + trackParsedData?.id">
         <h2 class="text-base lg:text-lg card-title">
           <Icon name="streamline:music-note-1-solid" />{{
             trackParsedData.title
@@ -25,7 +25,7 @@
         </h2>
       </NuxtLink>
       <p class="font-normal">
-        <NuxtLink :to="'/user/' + trackParsedData.user.handle">
+        <NuxtLink :to="'/user/' + trackParsedData?.user.handle">
           <Icon name="ph:person-fill" />
           {{ trackParsedData.user.name }}
         </NuxtLink>
@@ -35,9 +35,11 @@
         <span class="font-black"> - </span>
         <Icon name="ph:clock-fill" />
         {{
-          new Date(trackParsedData.duration * 1000)
-            .toISOString()
-            .substring(14, 19)
+          trackParsedData?.duration
+            ? new Date(trackParsedData.duration * 1000)
+                .toISOString()
+                .substring(14, 19)
+            : "00:00"
         }}
         <span class="font-black"> - </span>
         <Icon name="ph:play-fill" />
@@ -45,7 +47,7 @@
       </p>
     </div>
     <div class="mr-2 lg:mr-8 start-2 flex items-center">
-      <PlayButton :trackId="trackParsedData.id" />
+      <PlayButton :trackId="trackParsedData?.id" />
     </div>
   </div>
 </template>

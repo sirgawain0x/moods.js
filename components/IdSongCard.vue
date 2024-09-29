@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import type { Track } from "~/types/getTrack";
+</script>
+
 <template>
   <div
     class="card card-side bg-base-300 border-2 border-primary-content mx-2 lg:mx-10 mt-2"
@@ -5,16 +9,16 @@
     <figure>
       <img
         class="h-32 w-32 rounded-l-none"
-        :src="trackParsedData.artwork['480x480']"
+        :src="trackParsedData?.artwork?.['480x480']"
         alt="Cover Image"
       />
     </figure>
     <div class="card-body">
-      <NuxtLink :to="'/track/' + trackParsedData.id">
+      <NuxtLink :to="'/track/' + trackParsedData?.id">
         <h2 class="card-title">{{ trackParsedData.title }}</h2>
       </NuxtLink>
       <p>
-        <NuxtLink :to="'/user/' + trackParsedData.user.name">
+        <NuxtLink :to="'/user/' + trackParsedData?.user.name">
           <Icon name="ph:person-fill" />
           {{ trackParsedData.user.name }}
         </NuxtLink>
@@ -49,15 +53,19 @@ export default {
   },
   data() {
     return {
-      trackParsedData: [],
+      trackParsedData: {} as Track,
     };
   },
+
   methods: {
     async fetchTracks(trackId: string) {
       const { data: trackData } = await useFetch(
-        "https://discovery-au-02.audius.openplayer.org/v1/tracks/" +
-          trackId +
-          "?app_name=GENESIS-TM"
+        "https://discovery-us-01.audius.openplayer.org/v1/tracks/" + trackId,
+        {
+          query: {
+            app_name: "GENESIS-TM",
+          },
+        }
       );
       this.trackParsedData = (trackData.value as { data: any })?.data;
     },

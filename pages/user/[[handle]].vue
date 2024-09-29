@@ -1,28 +1,46 @@
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+import type { RepostResponse } from "@/types/reposts";
+import type { BulkResponse } from "@/types/getBulkTracks";
 
 const route = useRoute();
 
 const { data: requestData }: { data: any } = await useFetch(
   "https://discovery-us-01.audius.openplayer.org/v1/users/handle/" +
-    route.params.handle +
-    "?app_name=GENESIS-TM"
+    route.params.handle,
+  {
+    query: {
+      app_name: "GENESIS-TM",
+    },
+  }
 );
-const { data: artistData } = await useFetch(
-  "https://discoveryprovider2.audius.co/v1/users/" +
-    requestData.value?.data.id +
-    "/tracks?app_name=GENESIS-TM&limit=1000"
+const { data: artistData } = await useFetch<BulkResponse>(
+  "https://discoveryprovider2.audius.co/v1/users/" + requestData.value?.data.id,
+  {
+    query: {
+      app_name: "GENESIS-TM",
+    },
+  }
 );
-const { data: pinnedData } = await useFetch(
+const { data: pinnedData } = await useFetch<BulkResponse>(
   "https://discoveryprovider2.audius.co/v1/tracks/" +
-    requestData.value?.data.artist_pick_track_id +
-    "?app_name=GENESIS-TM&limit=1000"
+    requestData.value?.data.artist_pick_track_id,
+  {
+    query: {
+      app_name: "GENESIS-TM",
+    },
+  }
 );
-const { data: repostData } = await useFetch(
+const { data: repostData } = await useFetch<RepostResponse>(
   "https://discoveryprovider2.audius.co/v1/users/" +
     requestData.value?.data.id +
-    "/reposts?app_name=GENESIS-TM&limit=1000"
+    "/reposts",
+  {
+    query: {
+      limit: 1000,
+      app_name: "GENESIS-TM",
+    },
+  }
 );
 </script>
 
@@ -74,8 +92,8 @@ const { data: repostData } = await useFetch(
 
     <div v-if="requestData.data.artist_pick_track_id">
       <h2 class="card-title mt-4 mx-12">Most Popular Track</h2>
-      <div class="mx-2 lg:mx-10">
-        <SongCard :trackParsedData="pinnedData.data" :cool="true" />
+      <div class="mx-2 lg:mx-10" v-if="pinnedData">
+        <SongCard :trackParsedData="pinnedData?.data" :cool="true" />
       </div>
     </div>
 
@@ -88,9 +106,12 @@ const { data: repostData } = await useFetch(
         aria-label="Tracks"
         checked
       />
-      <div role="tabpanel" class="tab-content">
-        <p v-for="(track, index) in artistData.data" :key="index">
-          <SongCard :trackParsedData="artistData.data[index]" />
+      <div role="tabpanel" class="tab-content" v-if="artistData">
+        <p v-for="(track, index) in artistData?.data" :key="index">
+          <SongCard
+            :key="track?.id"
+            :trackParsedData="artistData?.data[index]"
+          />
         </p>
       </div>
 
@@ -101,15 +122,16 @@ const { data: repostData } = await useFetch(
         class="tab"
         aria-label="Reposts"
       />
-      <div role="tabpanel" class="tab-content">
+      <div role="tabpanel" class="tab-content" v-if="repostData">
         <p v-for="(track, index) in repostData.data" :key="index">
           <SongCard
-            v-if="repostData.data[index].item_type === 'track'"
-            :trackParsedData="repostData.data[index].item"
+            v-if="track?.item_type === 'track'"
+            :key="track?.item?.id"
+            :trackParsedData="repostData?.data[index].item"
           />
           <PlaylistCard
             v-if="repostData.data[index].item_type === 'playlist'"
-            :trackParsedData="repostData.data[index].item"
+            :trackParsedData="repostData.data[index]?.item"
           />
         </p>
       </div>

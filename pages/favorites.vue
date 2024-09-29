@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { GetFavoritesResponse } from "~/types/getFavorites";
+import type { BulkResponse } from "~/types/getBulkTracks";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { addTrackToPlaylist } from "~/stores/playlist";
@@ -16,30 +18,45 @@ if (!user) {
   login();
 }
 
-const { data: favoritesData } = await useFetch(
+const { data: favoritesData } = await useFetch<GetFavoritesResponse>(
   "https://discovery-us-01.audius.openplayer.org/v1/users/" +
-    user.value?.userId +
-    "/favorites?app_name=GENESIS-TM"
+    user?.value +
+    "/favorites",
+  {
+    query: {
+      app_name: "GENESIS-TM",
+    },
+  }
 );
 
 const addAllToPlaylist = () => {
   console.log("Loading Playlist...");
-  for (let i = 0; i < favoritesData.value?.data.length; i++) {
-    addTrackToPlaylist(favoritesData.value?.data[i].favorite_item_id);
+  if (favoritesData?.value?.data) {
+    favoritesData.value.data.forEach((item) => {
+      if (item.favorite_item_id) {
+        addTrackToPlaylist(item.favorite_item_id);
+      }
+    });
   }
   console.log("Playlist Loaded!");
 };
 
-for (let i = 0; i < favoritesData.value?.data.length; i++) {
-  if (favoritesData.value?.data[i].favorite_type === "SaveType.track") {
-    bulkList.push(favoritesData.value?.data[i].favorite_item_id);
-    bulkList.push("&id=");
+if (favoritesData.value?.data) {
+  for (const item of favoritesData.value.data) {
+    if (item.favorite_type === "SaveType.track" && item.favorite_item_id) {
+      bulkList.push(item.favorite_item_id);
+      bulkList.push("&id=");
+    }
   }
 }
-const { data: bulkTracksData } = await useFetch(
-  "https://discovery-us-01.audius.openplayer.org/v1/tracks?id=" +
-    "".concat(...bulkList) +
-    "&app_name=GENESIS-TM"
+const { data: bulkTracksData } = await useFetch<BulkResponse>(
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks",
+  {
+    query: {
+      id: bulkList,
+      app_name: "GENESIS-TM",
+    },
+  }
 );
 </script>
 

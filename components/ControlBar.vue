@@ -6,9 +6,10 @@ import {
   setPlaylistIndex,
 } from "~/stores/playlist";
 import { watch } from "vue";
+import type { Track } from "~/types/getTrack";
 
 let audioPlayer = ref<HTMLAudioElement | null>(null);
-const trackData = ref("string");
+let trackData = ref<Track | null>(null);
 let mediaData;
 const bulkTrackData = ref(null);
 const isPlaying = ref(true);
@@ -205,19 +206,19 @@ function setupMediaSession(superTrackData: any) {
       <div class="items-center justify-center hidden me-auto md:flex">
         <img
           class="h-12 me-3 rounded"
-          :src="trackData.artwork['480x480']"
-          alt="Song's Artwork"
+          :src="trackData?.artwork?.['480x480'] || '/music-banner.jpg'"
+          :alt="trackData?.title"
         />
         <div class="inline-block leading-none">
           <span class="text-sm">
-            <NuxtLink :to="'/track/' + trackData.id">
-              <Icon name="ph:music-note-fill" /> {{ trackData.title }}
+            <NuxtLink :to="'/track/' + trackData?.id">
+              <Icon name="ph:music-note-fill" /> {{ trackData?.title }}
             </NuxtLink>
           </span>
           <br />
           <span class="text-sm">
-            <NuxtLink :to="'/user/' + trackData.user.handle">
-              <Icon name="ph:person-fill" /> {{ trackData.user.name }}
+            <NuxtLink :to="'/user/' + trackData?.user.handle">
+              <Icon name="ph:person-fill" /> {{ trackData?.user.name }}
             </NuxtLink>
           </span>
         </div>
@@ -315,7 +316,7 @@ function setupMediaSession(superTrackData: any) {
             >
               <Icon
                 :name="
-                  audioPlayer.paused
+                  audioPlayer?.paused
                     ? 'streamline:button-play-solid'
                     : 'streamline:button-pause-2-solid'
                 "
@@ -363,7 +364,7 @@ function setupMediaSession(superTrackData: any) {
                 <h3 class="font-bold text-lg">My Queue</h3>
                 <div v-if="state.playlistIndex != -1">
                   <template v-if="bulkTrackData">
-                    <div v-for="track in bulkTrackData" :key="track.id">
+                    <div v-for="track in bulkTrackData" :key="track">
                       <SongCardMinimal :trackParsedData="track" />
                     </div>
                   </template>
@@ -422,9 +423,11 @@ function setupMediaSession(superTrackData: any) {
               class="text-sm font-medium text-gray-500 dark:text-gray-400 inline-flex"
             >
               {{
-                new Date(trackData.duration * 1000)
-                  .toISOString()
-                  .substring(14, 19)
+                trackData?.duration
+                  ? new Date(trackData.duration * 1000)
+                      .toISOString()
+                      .substring(14, 19)
+                  : "00:00"
               }}</span
             >
           </div>

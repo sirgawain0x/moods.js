@@ -1,18 +1,32 @@
 <script lang="ts" setup>
-const { data: trendingData } = await useFetch(
-  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending?time=week&limit=20&app_name=GENESIS-TM"
+import type { TrendingResponse } from "~/types/trending";
+import type { UndergroundResponse } from "~/types/underground";
+
+const { data: trendingData } = await useFetch<TrendingResponse>(
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending",
+  {
+    query: {
+      time: "week",
+      app_name: "GENESIS-TM",
+    },
+  }
 );
-const { data: undergroundData } = await useFetch(
-  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending/underground?time=week&limit=20&app_name=GENESIS-TM"
+const { data: undergroundData } = await useFetch<UndergroundResponse>(
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending/underground?time=week&limit=20&app_name=GENESIS-TM",
+  {
+    query: {
+      app_name: "GENESIS-TM",
+    },
+  }
 );
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center">
     <h1 class="text-center text-6xl font-black my-8">Welcome to GENESIS</h1>
-    <SearchBull placeholderText="What's that song?" />
+    <!-- <SearchBull placeholderText="What's that song?" />
     <p class="my-3 text-sm">Feeling Lucky?</p>
-    <NuxtLink class="btn btn-primary" to="/">Random</NuxtLink>
+    <NuxtLink class="btn btn-primary" to="/">Random</NuxtLink> -->
   </div>
   <div class="mx-2 lg:mx-8">
     <h1 class="text-3xl lg:text-4xl font-black mt-6">Discover New Curators</h1>
@@ -93,8 +107,8 @@ const { data: undergroundData } = await useFetch(
         :key="track.id"
       >
         <img
-          :src="track.artwork['480x480']"
-          alt="IMAGE"
+          :src="track?.artwork?.['480x480']"
+          :alt="track?.title || 'Track Artwork'"
           class="h-24 w-24 lg:w-32 lg:h-32 rounded-lg"
         />
         <div class="absolute bottom-2 right-2">
@@ -113,7 +127,7 @@ const { data: undergroundData } = await useFetch(
       </NuxtLink>
     </div>
     <h1 class="text-3xl lg:text-4xl font-black mt-14">
-      Weekly Underground Tracks
+      Top Underground Tracks
     </h1>
     <div
       class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
@@ -125,8 +139,8 @@ const { data: undergroundData } = await useFetch(
         :key="track.id"
       >
         <img
-          :src="track.artwork['480x480']"
-          alt="IMAGE"
+          :src="track?.artwork?.['480x480']"
+          :alt="track?.title || 'Track Artwork'"
           class="h-24 w-24 lg:w-32 lg:h-32 rounded-lg"
         />
         <div class="absolute bottom-2 right-2">
