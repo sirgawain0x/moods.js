@@ -1,6 +1,12 @@
 {
-  "name": "mood-tm",
-  "version": "0.3.3",
+  "name": "genesis-tm",
+  "version": "0.3.4",
+  "author": {
+    "name": "Creative Organization DAO",
+    "email": "creatives@creativeplatform.com",
+    "url": "https://creativeplatform.xyz"
+  },
+  "description": "Your new home for discovering new music. Discover new artists and take part in their evolution.",
   "private": true,
   "type": "module",
   "scripts": {
@@ -25,6 +31,7 @@
     "web3": "^4.13.0"
   },
   "devDependencies": {
+    "@nuxtjs/pwa": "^3.3.5",
     "daisyui": "^4.12.2",
     "nuxt-icon": "^0.6.10",
     "tailwindcss": "^3.4.3"
