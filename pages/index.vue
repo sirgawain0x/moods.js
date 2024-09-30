@@ -161,9 +161,7 @@ const { data: undergroundData } = await useFetch<UndergroundResponse>(
         <h1 class="text-xl font-black text-center mb-2">Coming Soon...</h1>
       </div>
     </div>
-    <h1 class="text-3xl lg:text-4xl font-black mt-14">
-      Weekly Trending Tracks
-    </h1>
+    <h1 class="text-3xl lg:text-4xl font-black mt-14">Week Trending Tracks</h1>
     <div
       class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
       v-if="trendingData"
@@ -193,9 +191,7 @@ const { data: undergroundData } = await useFetch<UndergroundResponse>(
         <h1 class="font-bold mt-2">See All...</h1>
       </NuxtLink>
     </div>
-    <h1 class="text-3xl lg:text-4xl font-black mt-14">
-      Monthly Trending Tracks
-    </h1>
+    <h1 class="text-3xl lg:text-4xl font-black mt-14">Month Trending Tracks</h1>
     <div
       class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
       v-if="trendingDataMonth"
@@ -225,9 +221,7 @@ const { data: undergroundData } = await useFetch<UndergroundResponse>(
         <h1 class="font-bold mt-2">See All...</h1>
       </NuxtLink>
     </div>
-    <h1 class="text-3xl lg:text-4xl font-black mt-14">
-      Yearly Trending Tracks
-    </h1>
+    <h1 class="text-3xl lg:text-4xl font-black mt-14">Year Trending Tracks</h1>
     <div
       class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
       v-if="trendingDataYear"
