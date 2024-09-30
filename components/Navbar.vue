@@ -64,7 +64,7 @@ const user = ref(useCookie("user").value);
         </li>
         <li>
           <NuxtLink href="https://news.creativeplatform.xyz">
-            <Icon name="ph:info-fill" /> Discover
+            <Icon name="ph:info-fill" /> News
           </NuxtLink>
         </li>
         <li>
@@ -175,7 +175,7 @@ const user = ref(useCookie("user").value);
           href="https://news.creativeplatform.xyz"
           class="flex rounded-lg bg-base-100 h-20 justify-center items-center flex-col"
         >
-          <Icon name="ic:baseline-water-drop" /> Discover
+          <Icon name="ic:baseline-water-drop" /> News
         </NuxtLink>
 
         <NuxtLink
