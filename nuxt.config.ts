@@ -44,7 +44,7 @@ export default defineNuxtConfig({
   pwa: {
     icon: {
       source: "/img/Genesis.png",
-      purpose: "maskable",
+      purpose: "any",
     },
     meta: {
       theme_color: "#d9934f",
