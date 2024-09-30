@@ -42,7 +42,7 @@
     >
       For Music Lovers:
     </p>
-    <ul class="list-disc list-inside">
+    <ul class="list-disc list-inside text-center" style="width: 50%">
       <li>Explore curated playlists and discover new artists and genres.</li>
       <li>Connect with passionate music curators.</li>
       <li>Support your favorite artists by reposting and tipping them.</li>
@@ -53,7 +53,7 @@
     >
       For Music Creators:
     </p>
-    <ul class="list-disc list-inside">
+    <ul class="list-disc list-inside text-center" style="width: 50%">
       <li>Submit your music to our platform for curation.</li>
       <li>Earn tips from listeners and support from the community.</li>
       <li>Build a loyal fanbase and grow your audience.</li>
