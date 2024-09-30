@@ -17,7 +17,7 @@ const { data: trendingData } = await useFetch<TrendingResponse>(
   <div class="mx-2 lg:mx-8">
     <div class="grid grid-cols-2">
       <h1 class="text-3xl lg:text-4xl font-black mt-14">
-        Weekly Trending Tracks
+        Week Trending Tracks
       </h1>
       <NuxtLink
         to="/"
