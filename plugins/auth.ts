@@ -28,6 +28,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           grant_type: "authorization_code",
         }
       );
+      console.log(data.user);
       return data.user;
     }
     return null;
