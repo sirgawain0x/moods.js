@@ -21,7 +21,7 @@
   "lang": "en-US",
   "name": "GENESIS™",
   "short_name": "GENESIS™",
-  "start_url": "https://music.creativeplatform.xyz",
-  "scope": "https://music.creativeplatform.xyz",
+  "start_url": "/",
+  "scope": "/",
   "description": "Your new home for discovering new music. Discover new artists and take part in their evolution."
 }

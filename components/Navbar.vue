@@ -139,7 +139,7 @@ const user = ref(useCookie("user").value);
               </g>
             </g>
           </svg>
-          Login with Audius
+          Audius Login
         </button>
       </div>
     </div>
