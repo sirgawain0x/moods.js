@@ -6,7 +6,6 @@ const { data: trendingData } = await useFetch<TrendingResponse>(
   {
     query: {
       time: "allTime",
-      limit: 20,
       app_name: "GENESIS-TM",
     },
   }
