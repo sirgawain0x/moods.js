@@ -285,7 +285,7 @@ const { data: playlistDataAlltime } = await useFetch<PlaylistResponse>(
       </NuxtLink>
     </div>
     <h1 class="text-3xl lg:text-4xl font-black mt-14">
-      Top Underground Tracks
+      Trending Underground Tracks
     </h1>
     <div
       class="grid grid-cols-4 lg:grid-cols-10 mt-4 gap-4"
