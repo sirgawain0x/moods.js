@@ -4,6 +4,14 @@
     <h1 class="text-center text-3xl lg:text-6xl font-black mt-8 mb-8">
       Search results for: {{ $route.query.query }}
     </h1>
+    <div class="mx-2 lg:mx-10 flex justify-end">
+      <button
+        @click="openModal"
+        class="self-end text-xl lg:text-2xl font-black mt-14 border-2 border-base-300 rounded-lg p-2"
+      >
+        Exit Search
+      </button>
+    </div>
     <div class="mx-2 lg:mx-10">
       <div role="tablist" class="tabs lg:tabs-lg font-bold mt-4 w-full">
         <input
@@ -101,6 +109,12 @@ export default {
       this.playlists = data?.value?.data?.playlists || [];
       this.users = data?.value?.data?.users || [];
       this.albums = data?.value?.data?.albums || [];
+    },
+    openModal() {
+      const modal = document.getElementById("menu_modal");
+      if (modal) {
+        modal.showModal();
+      }
     },
   },
   watch: {
