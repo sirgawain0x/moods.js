@@ -37,17 +37,16 @@ const getPlaylistTrackData = async (trackId: string) => {
 };
 
 const addAllToPlaylist = async () => {
-  // {{ edit_1 }}
-  console.log("Loading Playlist...");
+  //console.log("Loading Playlist...");
   for (
     let i = 0;
     i < playlistTracksData.value?.data[0].playlist_contents.length;
     i++
   ) {
     const trackId =
-      playlistTracksData.value?.data[0].playlist_contents[i].track_id; // {{ edit_2 }}
+      playlistTracksData.value?.data[0].playlist_contents[i].track_id;
     addTrackToPlaylist(trackId);
-    const trackData = await getPlaylistTrackData(trackId); // {{ edit_3 }}
+    const trackData = await getPlaylistTrackData(trackId);
     // You can process trackData here if needed
   }
   console.log("Playlist Loaded!");

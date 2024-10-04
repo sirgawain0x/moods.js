@@ -22,7 +22,7 @@ const props = defineProps<{
 
 const handleAddToPlaylist = (trackId: string) => {
   addTrackToPlaylist(trackId);
-  console.log(state.playlist, state.playlistIndex);
+  //console.log(state.playlist, state.playlistIndex);
 };
 </script>
 

@@ -30,7 +30,7 @@ const { data: favoritesData } = await useFetch<GetFavoritesResponse>(
 );
 
 const addAllToPlaylist = () => {
-  console.log("Loading Playlist...");
+  //console.log("Loading Playlist...");
   if (favoritesData?.value?.data) {
     favoritesData.value.data.forEach((item) => {
       if (item.favorite_item_id) {
