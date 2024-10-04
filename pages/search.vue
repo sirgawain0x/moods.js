@@ -28,11 +28,9 @@
           v-if="tracks.length != 0"
           tab-active
         >
-          <SongCard
-            v-for="track in tracks"
-            :trackParsedData="track"
-            v-bind:key="track.id"
-          />
+          <div v-for="track in tracks" :key="track.id">
+            <SongCard :trackParsedData="track" />
+          </div>
         </div>
 
         <input
@@ -43,8 +41,8 @@
           aria-label="Playlists"
         />
         <div role="tabpanel" class="tab-content" v-if="playlists.length != 0">
-          <div v-for="playlist in playlists" v-bind:key="playlist.id">
-            <PlaylistCard :trackParsedData="playlist" />
+          <div v-for="playlist in playlists" :key="playlist.id">
+            <PlaylistCard :playlistParsedData="playlist" />
           </div>
         </div>
 
@@ -55,9 +53,9 @@
           class="tab"
           aria-label="Albums"
         />
-        <div role="tabpanel" class="tab-content" v-if="playlists.length != 0">
-          <div v-for="playlist in albums" v-bind:key="playlist.id">
-            <AlbumCard :trackParsedData="playlist" />
+        <div role="tabpanel" class="tab-content" v-if="albums.length != 0">
+          <div v-for="album in albums" :key="album.id">
+            <AlbumCard :trackParsedData="album" />
           </div>
         </div>
 
@@ -70,33 +68,32 @@
         />
 
         <div role="tabpanel" class="tab-content" v-if="users.length != 0">
-          <div v-for="user in users" v-bind:key="user.id">
+          <div v-for="user in users" :key="user.id">
             <UserCard :userParsedData="user" />
           </div>
         </div>
       </div>
 
       <!--p class="text-lg text-center mb-32">Icon Lib:
-            <br>
-            <Icon name="streamline:song-recommendation-solid" />
-            <br>
-            <Icon name="streamline:music-folder-song-solid" />
-            <br>
-            <Icon name="ph:playlist-bold" />
-            <br>
-        </p-->
+          <br>
+          <Icon name="streamline:song-recommendation-solid" />
+          <br>
+          <Icon name="streamline:music-folder-song-solid" />
+          <br>
+          <Icon name="ph:playlist-bold" />
+          <br>
+      </p-->
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-
 export default {
   data() {
     return {
       tracks: [],
       playlists: [],
+      albums: [],
       users: [],
     };
   },
@@ -106,12 +103,12 @@ export default {
   methods: {
     async fetchAll() {
       const { data } = await useFetch(
-        `https://blockdaemon-audius-discovery-03.bdnodes.net/v1/full/search/full?query=${this.$route.query.query}&app_name=GENESIS-TM`
+        `https://audius-nodes.com/v1/full/search/full?query=${this.$route.query.query}&app_name=GENESIS-TM`
       );
-      this.tracks = data.value.data.tracks;
-      this.playlists = data.value.data.playlists;
-      this.users = data.value.data.users;
-      this.albums = data.value.data.albums;
+      this.tracks = data?.value?.data?.tracks || []; // Ensure tracks are assigned correctly
+      this.playlists = data?.value?.data?.playlists || [];
+      this.users = data?.value?.data?.users || [];
+      this.albums = data?.value?.data?.albums || [];
     },
     openModal() {
       const modal = document.getElementById("menu_modal");

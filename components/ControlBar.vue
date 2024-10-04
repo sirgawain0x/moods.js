@@ -75,7 +75,7 @@ const getBulkData = () => {
 };
 
 watch(index, (newValue, oldValue) => {
-  console.log("Index updated", newValue, oldValue);
+  //console.log("Index updated", newValue, oldValue);
   audioPlayer.value = new Audio(
     "https://audius-discovery-4.theblueprint.xyz/v1/tracks/" +
       state.playlist[state.playlistIndex] +

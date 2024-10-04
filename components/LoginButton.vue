@@ -41,6 +41,6 @@
 <script setup>
 function login() {
   // Implement your login logic here
-  console.log("Login button clicked");
+  //console.log("Login button clicked");
 }
 </script>

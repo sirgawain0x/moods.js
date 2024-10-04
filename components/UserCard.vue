@@ -6,7 +6,7 @@
     <figure class="hidden lg:flex">
       <img
         class="h-32 w-32 rounded-l-none hidden lg:flex"
-        :src="userParsedData.profile_picture['480x480']"
+        :src="userParsedData?.profile_picture?.['480x480']"
         alt="Cover Image"
       />
     </figure>

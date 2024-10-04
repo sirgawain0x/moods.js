@@ -18,7 +18,7 @@ const { data: requestData } = await useFetch<IUser>(
 );
 const { data: artistData } = await useFetch<ITrackResponse>(
   "https://discoveryprovider2.audius.co/v1/users/" +
-    requestData?.value?.data?.id +
+    requestData?.value?.data.id +
     "/tracks",
   {
     query: {
@@ -58,7 +58,7 @@ const { data: repostData } = await useFetch<RepostResponse>(
   >
     <img
       class="absolute h-32 w-32 rounded-full bottom-0 left-10 translate-y-5"
-      :src="requestData.data.profile_picture?.['480x480']"
+      :src="requestData.data.profile_picture['480x480']"
       alt="Cover Image"
     />
     <h1
