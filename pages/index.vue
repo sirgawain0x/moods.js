@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { TrendingResponse } from "~/types/trending";
 import type { UndergroundResponse } from "~/types/underground";
+import type { PlaylistResponse } from "~/types/playlists";
 
 //Weekly Trending
 const { data: trendingData } = await useFetch<TrendingResponse>(
@@ -50,6 +51,16 @@ const { data: trendingDataAlltime } = await useFetch<TrendingResponse>(
 const { data: undergroundData } = await useFetch<UndergroundResponse>(
   "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending/underground?limit=19&app_name=GENESIS-TM"
 );
+
+const { data: playlistDataAlltime } = await useFetch<PlaylistResponse>(
+  "https://audius-discovery-1.altego.net/v1/playlists/trending",
+  {
+    query: {
+      time: "allTime",
+      app_name: "GENESIS-TM",
+    },
+  }
+);
 </script>
 
 <template>
@@ -93,8 +104,11 @@ const { data: undergroundData } = await useFetch<UndergroundResponse>(
       </NuxtLink>
     </div>
     <h1 class="text-3xl lg:text-4xl font-black mt-6">Discover New Curators</h1>
-    <div class="grid grid-cols-3 lg:grid-cols-8 mt-4 gap-4">
-      <MoodCard
+    <div
+      class="grid grid-cols-3 lg:grid-cols-8 mt-4 gap-4"
+      v-if="playlistDataAlltime"
+    >
+      <!-- <MoodCard
         gradient="from-green-500 via-green-700 to-green-900"
         icon="ph:leaf-fill"
         name="Fresh<br>Releases"
@@ -143,17 +157,41 @@ const { data: undergroundData } = await useFetch<UndergroundResponse>(
         gradient="from-slate-300 via-slate-400 to-slate-500"
         icon="fluent:weather-duststorm-24-filled"
         name="Blowin'<br>Trees"
-      />
-
+      /> -->
+      <div
+        class="relative"
+        v-for="playlist in playlistDataAlltime?.data.slice(0, 19)"
+        :key="playlist?.id"
+      >
+        <img
+          :src="playlist?.artwork?.['480x480']"
+          :alt="playlist?.playlist_name || 'Playlist Artwork'"
+          class="h-24 w-24 lg:w-32 lg:h-32 rounded-lg"
+        />
+        <div class="absolute bottom-2 right-2">
+          <PlaylistButton :playlistId="playlist?.id" />
+        </div>
+      </div>
+      <!-- <NuxtLink
+        to="/trendingAlltime"
+        class="bg-[url('/img/rainbow.webp')] bg-center bg-cover rounded-lg flex justify-center flex-col items-center h-24 w-24 lg:w-32 lg:h-32"
+      >
+        <Icon
+          name="streamline:add-circle-solid"
+          class="text-4xl lg:text-6xl rounded-lg flex items-center justify-center"
+        />
+        <h1 class="font-bold mt-2">See All...</h1>
+      </NuxtLink> -->
       <div
         class="flex rounded-lg justify-center items-center flex-col bg-base-300 w-32 lg:w-36"
       >
-        <div
+        <NuxtLink
+          to="/playlistAlltime"
           class="bg-[url('/img/rainbow.webp')] bg-center bg-cover m-2 rounded-lg h-28 w-28 lg:h-32 lg:w-32 flex justify-center items-center text-6xl lg:text-[6rem]"
         >
           <Icon name="streamline:add-circle-solid" class="text-base-100" />
-        </div>
-        <h1 class="text-xl font-black text-center mb-2">Coming Soon...</h1>
+        </NuxtLink>
+        <h1 class="text-xl font-black text-center mb-2">See All...</h1>
       </div>
     </div>
     <h1 class="text-3xl lg:text-4xl font-black mt-14">Week Trending Tracks</h1>
