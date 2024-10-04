@@ -22,7 +22,7 @@ const getPlaylistTrackData = async (trackId: string) => {
   // {{ edit_4 }}
   try {
     const response = await fetch(
-      "https://audius-discovery-6.cultur3stake.com/v1/tracks/" +
+      "https://audius-discovery-1.altego.net/v1/tracks/" +
         trackId +
         "?app_name=GENESIS-TM",
       {
