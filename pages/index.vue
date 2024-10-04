@@ -48,12 +48,7 @@ const { data: trendingDataAlltime } = await useFetch<TrendingResponse>(
 
 // Top Underground
 const { data: undergroundData } = await useFetch<UndergroundResponse>(
-  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending/underground?time=week&limit=20&app_name=GENESIS-TM",
-  {
-    query: {
-      app_name: "GENESIS-TM",
-    },
-  }
+  "https://discovery-us-01.audius.openplayer.org/v1/tracks/trending/underground?limit=19&app_name=GENESIS-TM"
 );
 </script>
 

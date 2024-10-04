@@ -31,7 +31,7 @@ const index = computed({
 
 const getTrackData = (trackId: string) => {
   fetch(
-    "https://audius-discovery-6.cultur3stake.com/v1/tracks/" +
+    "https://audius-discovery-1.altego.net/v1/tracks/" +
       trackId +
       "?app_name=GENESIS-TM",
     {
@@ -54,7 +54,7 @@ const getTrackData = (trackId: string) => {
 
 const getBulkData = () => {
   fetch(
-    "https://audius-discovery-6.cultur3stake.com/v1/tracks?" +
+    "https://audius-discovery-1.altego.net/v1/tracks?" +
       state.playlist.map((item: any) => `id=${item}`).join("&") +
       "&app_name=GENESIS-TM",
     {
