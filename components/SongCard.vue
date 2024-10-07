@@ -37,7 +37,7 @@
         }}
         <span class="font-black"> - </span>
         <Icon name="ph:play-fill" />
-        {{ trackParsedData?.play_count }} Listenings
+        {{ trackParsedData?.play_count }} Plays
       </p>
     </div>
     <div class="mr-2 lg:mr-8 start-2 flex items-center">
