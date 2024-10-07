@@ -62,7 +62,7 @@ const { data: repostData } = await useFetch<RepostResponse>(
       alt="Cover Image"
     />
     <h1
-      class="absolute bottom-12 left-44 font-bold text-pink-600 text-xl lg:text-3xl"
+      class="absolute bottom-12 left-44 font-bold text-pink-600 glass p-1 rounded-lg text-xl lg:text-3xl"
     >
       {{ requestData.data.handle }}
       <div
