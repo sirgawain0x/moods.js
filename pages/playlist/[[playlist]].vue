@@ -87,7 +87,7 @@ const { data: bulkTracksData } = await useFetch<BulkResponse>(
     <h2
       class="absolute bottom-3 left-36 lg:left-44 text-md lg:text-xl glass p-1 rounded-lg"
     >
-      {{ playlistTracksData.data[0].play_count }} Listenings -
+      {{ playlistTracksData.data[0].total_play_count }} Listenings -
       {{ playlistTracksData.data[0].favorite_count }}
       Likes
     </h2>
