@@ -37,10 +37,11 @@ const { data: trackData } = await useFetch<{ data: Track }>(
     <h3
       class="absolute bottom-64 lg:bottom-2 right-1 lg:right-2 text-sm lg:text-md bg-primary p-1 rounded-lg text-primary-content"
     >
-      <Icon name="streamline:sign-hashtag-solid" /> {{ trackData?.data?.id }}
+      <Icon name="streamline:sign-hashtag-solid" />
+      {{ trackData?.data?.id }}
     </h3>
   </div>
   <div class="card m-8">
-    <SongCard :key="trackData?.data?.id" :trackParsedData="trackData" />
+    <SongCard :key="trackData?.data?.id" :trackParsedData="trackData?.data" />
   </div>
 </template>

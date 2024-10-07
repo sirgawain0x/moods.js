@@ -105,7 +105,7 @@ export default {
       const { data } = await useFetch(
         `https://audius-nodes.com/v1/full/search/full?query=${this.$route.query.query}&app_name=GENESIS-TM`
       );
-      this.tracks = data?.value?.data?.tracks || []; // Ensure tracks are assigned correctly
+      this.tracks = data?.value?.data?.tracks || [];
       this.playlists = data?.value?.data?.playlists || [];
       this.users = data?.value?.data?.users || [];
       this.albums = data?.value?.data?.albums || [];

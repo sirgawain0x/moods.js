@@ -80,7 +80,7 @@ const { data: bulkTracksData } = await useFetch<BulkResponse>(
       alt="Cover Image"
     />
     <h1
-      class="absolute bottom-12 left-36 lg:left-44 font-bold text-xl lg:text-3xl"
+      class="absolute bottom-12 left-36 lg:left-44 font-bold glass p-1 rounded-lg text-xl lg:text-3xl"
     >
       {{ playlistTracksData.data[0].playlist_name }}
     </h1>
